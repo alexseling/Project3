@@ -1,5 +1,6 @@
-package edu.msu.project3;
+package edu.msu.replicant.project3;
 
+import edu.msu.project3.R;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

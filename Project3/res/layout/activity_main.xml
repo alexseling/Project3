@@ -60,7 +60,7 @@
         android:text="@string/longitude"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <edu.msu.project3.DrawingView
+    <edu.msu.replicant.project3.DrawingView
         android:id="@+id/drawingView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

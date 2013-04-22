@@ -1,4 +1,4 @@
-package edu.msu.project3;
+package edu.msu.replicant.project3;
 
 import android.content.Context;
 import android.content.Intent;
