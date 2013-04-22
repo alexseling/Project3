@@ -12,6 +12,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +29,33 @@ public class MainActivity extends Activity {
     private LocationManager locationManager = null;
     
     private ActiveListener activeListener = new ActiveListener();
+    
+    /**
+     * Communicates with the accelerometer
+     */
+    private AccelListener accelListener;
+    
+    /**
+     * The accelerometer
+     */
+    private Sensor accelSensor;
+    
+    /**
+     * The z component of the acceleration vector.
+     * (Bigger = more flat, maxes at 9.81 because physics)
+     */
+    private float z = 0;
 
+    /**
+     * Gravity constant
+     */
+    private final static float G = 9.81f;
+    
+    /**
+     * The width drawn when the phone is 100% horizontal.
+     */
+    private final static int MAX_WIDTH = 20;
+    
     /**
      * Request code when selecting a color
      */
@@ -239,8 +269,13 @@ public class MainActivity extends Activity {
 	 */
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
         unregisterListeners();
+        if (accelSensor != null){
+    		SensorManager sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+    		sensorManager.unregisterListener(accelListener);
+    		accelListener = null;
+    		accelSensor = null;
+    	}
 		super.onPause();
 	}
 
@@ -249,9 +284,16 @@ public class MainActivity extends Activity {
 	 */
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
         registerListeners();
+        SensorManager sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+    	accelSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+    	if(accelSensor != null) {
+    		accelListener = new AccelListener();
+    		sensorManager.registerListener(accelListener,
+    				accelSensor,
+    				SensorManager.SENSOR_DELAY_GAME);
+    	}
 	}
 	
 	private class ActiveListener implements LocationListener {
@@ -270,19 +312,52 @@ public class MainActivity extends Activity {
 
 		@Override
 		public void onProviderEnabled(String provider) {
-			// TODO Auto-generated method stub
+
 			
 		}
 
 		@Override
 		public void onStatusChanged(String provider, int status, Bundle extras) {
-			// TODO Auto-generated method stub
+			// 
 			
 		}
 
         
     };
     
-	
+    /**
+     * Receives input from dat accelerometer. Sets line width accordingly.
+     * @author Cam
+     *
+     */
+    private class AccelListener implements SensorEventListener {
 
-}
+		@Override
+		public void onAccuracyChanged(Sensor sensor, int accuracy) {
+			
+		}
+
+		/**
+		 * When the sensor changes, updates the width of the line.
+		 */
+		@Override
+		public void onSensorChanged(SensorEvent event) {
+			/* z is the z component of the vector returned by the
+			 * accelorometer. I take the absolutely value of this
+			 * because we do not want a negative width! 
+			 */
+			z = Math.abs(event.values[2]);
+			
+			// Percentage of max.
+			z /= G;
+			
+			float width = z * MAX_WIDTH;
+			
+			drawingView.setCurrentPaintWidth(width);
+		}
+    	
+    
+    
+
+    };
+};
