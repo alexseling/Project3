@@ -29,12 +29,14 @@ public final class R {
         public static final int buttonSave=0x7f08000a;
         public static final int colorSelectView=0x7f080000;
         public static final int drawingView=0x7f080007;
-        public static final int itemReset=0x7f08000b;
-        public static final int itemScale=0x7f08000c;
+        public static final int editTextScale=0x7f08000c;
+        public static final int itemReset=0x7f08000d;
+        public static final int itemScale=0x7f08000e;
         public static final int linearLayout1=0x7f080008;
         public static final int textLatitude=0x7f080003;
         public static final int textLongitude=0x7f080004;
         public static final int textProvider=0x7f080002;
+        public static final int textView1=0x7f08000b;
         public static final int textViewLatitudeLabel=0x7f080005;
         public static final int textViewLongitudeLabel=0x7f080006;
         public static final int textViewProviderLabel=0x7f080001;
@@ -42,6 +44,7 @@ public final class R {
     public static final class layout {
         public static final int activity_color_select=0x7f030000;
         public static final int activity_main=0x7f030001;
+        public static final int dialog_scale=0x7f030002;
     }
     public static final class menu {
         public static final int main=0x7f070000;
@@ -58,6 +61,7 @@ public final class R {
         public static final int provider=0x7f050002;
         public static final int reset=0x7f05000a;
         public static final int save=0x7f050009;
+        public static final int scaletext=0x7f05000c;
         public static final int setscale=0x7f05000b;
     }
     public static final class style {

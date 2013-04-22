@@ -6,13 +6,17 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -80,6 +84,40 @@ public class MainActivity extends Activity {
             
         case R.id.itemScale:
         	reset();
+        	
+        	// The drawing is done
+            // Instantiate a dialog box builder
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            // Parameterize the builder
+            builder.setTitle("Change Scale");
+            
+            // Get the layout inflater
+            LayoutInflater inflater = this.getLayoutInflater();
+
+            // Inflate and set the layout for the dialog
+            // Pass null as the parent view because its going in the dialog layout
+            builder.setView(inflater.inflate(R.layout.dialog_scale, null))
+            // Add action buttons
+               .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int id) {
+    	            	EditText scaleText = (EditText)((AlertDialog) dialog).findViewById(R.id.editTextScale);
+    	            	
+    	            	if (!scaleText.getText().toString().equals("")) {
+    	            		mapScale = Integer.parseInt(scaleText.getText().toString());
+    	            	}
+                   }
+               })
+               .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int id) {
+                       
+                   }
+               }); 
+            
+            // Create the dialog box and show it
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         	return true;
         }
         return super.onOptionsItemSelected(item);
