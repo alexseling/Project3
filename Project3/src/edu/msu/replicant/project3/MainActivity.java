@@ -263,6 +263,18 @@ public class MainActivity extends Activity {
         setUI();
     }
 
+    
+    /**
+	 * send the drawing to the server
+	 * @param view
+	 */
+	public void onSend(View view) {
+        ViewSender sender = new ViewSender();
+        sender.sendView(this,  drawingView, "Replicant");
+    }
+	
+    
+    
 	
     /* (non-Javadoc)
 	 * @see android.app.Activity#onPause()

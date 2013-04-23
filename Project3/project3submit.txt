@@ -1,0 +1,39 @@
+
+Project 3 Submission
+
+Group Name:   Replicant
+
+When you have completed the project, complete the following form and include it with your project. Include this file as a text file in the folder with your project when you turn it in. 
+
+Project Name: the big drawing app
+
+Project Description:  draw a picture by moving around and being tracked by gps
+
+
+Member 1: Malcolm Doering
+
+Responsiblity:
+Submit drawing to the cloud
+
+
+Member 2: Alex Seling
+
+Responsiblity:
+Create and combine drawing project and GPS step assignment 
+
+
+Member 3: Cameron Keif
+
+Responsiblity:
+Accelerometer and changing line width 
+
+
+Member 4 (if applicable): Bill de Araujo
+
+Responsiblity:
+Presentation, miscellaneous tasks, and draw picture 
+
+
+
+
+
